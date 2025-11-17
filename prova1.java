@@ -4,8 +4,6 @@ public class prova1 {
     public static void main (String[] args) {
         List<Object> list1 = new ArrayList<>();
         List<Object> list2 = new ArrayList<>();
-        Collections.addAll(list1, 1, 2, 3, 4, 5);
-        Collections.addAll(list2, 3, 4, 5, 6, 7);
         Scanner sc = new Scanner(System.in);
         
         
