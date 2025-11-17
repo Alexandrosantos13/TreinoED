@@ -13,35 +13,44 @@ public class prova1 {
             
             
             System.out.println("\n--- MENU ---");
-            System.out.println("Adicionar a lista 1: Digite 1");
-            System.out.println("Adicionar a lista 2: Digite 2");
-            System.out.println("Ver resultado da Interseção: Digite 3");
+            System.out.println("Adicionar à lista 1: Digite 1");
+            System.out.println("Adicionar à lista 2: Digite 2");
+            System.out.println("Ver diferença (lista 1 - lista 2): Digite 3");
+            System.out.println("Ver união das listas: Digite 4");
+            System.out.println("Ver interseção das listas: Digite 5");
             System.out.println("Sair: Digite 0");
 
             int switchChoice = sc.nextInt(); 
 
             switch (switchChoice) {
                 case 1:
-                    System.out.println("Digite o valor para add na lista 1");
+                    System.out.println("Digite o valor para adicionar na lista 1");
                     list1.add(sc.next());
                     clearScreen(); 
                     break;
                 case 2:
-                    System.out.println("Digite o valor para add na lista 2");
+                    System.out.println("Digite o valor para adicionar na lista 2");
                     list2.add(sc.next());
                     clearScreen(); 
                     break;
                 case 3:
-                    Object[] ex = letraA(list1, list2);
+                    Object[] ex = Difference(list1, list2);
                     System.out.println("Resultado: " + Arrays.toString(ex));
-                    System.out.println("Pression3e Enter para continuar...");
+                    System.out.println("Pressione Enter para continuar...");
                     sc.next(); 
                     sc.nextLine(); 
                     break;
                     case 4:
-                    Object[] ex2 = letraB(list1, list2);
+                    Object[] ex2 = Union(list1, list2);
                     System.out.println("Resultado: " + Arrays.toString(ex2));
-                    System.out.println("Pression3e Enter para continuar...");
+                    System.out.println("Pressione Enter para continuar...");
+                    sc.next(); 
+                    sc.nextLine(); 
+                    break;
+                    case 5:
+                    Object[] ex3 = Intersection(list1, list2);
+                    System.out.println("Resultado: " + Arrays.toString(ex3));
+                    System.out.println("Pressione Enter para continuar...");
                     sc.next(); 
                     sc.nextLine(); 
                     break;
@@ -56,7 +65,7 @@ public class prova1 {
         }
     }
     
-    public static <T> Object[] letraA(List <T> list1, List <T> list2){
+    public static <T> Object[] Difference(List <T> list1, List <T> list2){
         List <T> temp = new LinkedList<>();
         for (int i =0; i<list1.size(); i++){
             boolean isequal = false;
@@ -74,7 +83,7 @@ public class prova1 {
         }
         return temp.toArray(new Object [0]);
     }
-        public static <T> Object[] letraB(List <T> list1, List <T> list2){
+        public static <T> Object[] Union(List <T> list1, List <T> list2){
         List <T> temp = new LinkedList<>();
         for (int i =0; i<list1.size(); i++){
             boolean isequal = false;
@@ -90,10 +99,10 @@ public class prova1 {
                 temp.add(list1.get(i));
             }
         }
-        for (int j =0; j<list1.size(); j++){
+        for (int j =0; j<list2.size(); j++){
             boolean isequal = false;
             boolean alreadyhave=false;
-            for (int i = 0; i<list2.size();i++){
+            for (int i = 0; i<list1.size();i++){
                     isequal=Objects.equals(list2.get(j),list1.get(i));
                     alreadyhave=temp.contains(list2.get(j));
                     if (isequal ||alreadyhave){
@@ -107,6 +116,22 @@ public class prova1 {
         
         return temp.toArray(new Object [0]);
 }
+
+public static <T> Object[] Intersection(List <T> list1, List <T> list2){
+        List <T> temp = new LinkedList<>();
+        for (int i =0; i<list1.size(); i++){
+            boolean isequal = false;
+            boolean alreadyhave=false;
+            for (int j = 0; j<list2.size();j++){
+                    isequal=Objects.equals(list1.get(i),list2.get(j));
+                    alreadyhave=temp.contains(list1.get(i));
+                    if (isequal &&!alreadyhave){
+                        temp.add(list2.get(j));
+                }
+            }
+        }
+        return temp.toArray(new Object [0]);
+    }
 public static void clearScreen() {
         for (int i = 0; i < 50; i++) {
             System.out.println();
